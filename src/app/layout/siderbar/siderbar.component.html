@@ -1,0 +1,45 @@
+<div class="drawer lg:drawer-open">
+    <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content flex flex-col items-center justify-center">
+        <!-- Botón para abrir el sidebar en pantallas pequeñas -->
+        <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
+            Open Menu
+        </label>
+    </div>
+    <div class="drawer-side">
+        <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+
+        <!-- Sidebar -->
+        <div class="bg-base-200 min-h-full w-80 p-4 flex flex-col shadow-lg">
+
+            <!-- Logo en la parte superior -->
+            <div class="avatar items-center justify-center flex">
+                <div class="w-24 rounded-xl ">
+                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                </div>
+            </div>
+
+            <!-- Menú -->
+             <ul class="menu bg-base-200 rounded-box w-56">
+                <li><a class="text-xl font-semibold" href="">Dashboard</a></li>
+                <li>
+                    <details close>
+                        <summary class="text-xl font-semibold">Facturas</summary>
+                        <ul>
+                            <li><a class="text-base" href="">Ver Facturas</a></li>
+                            <li><a class="text-base" href="">Crear Factura</a></li>
+                        </ul>
+                    </details>
+                </li>
+
+
+                <li>
+                    <a
+                        class="flex items-center gap-2 text-lg font-medium text-gray-700 hover:bg-red-500 hover:text-white p-3 rounded-lg transition-all">
+                        <i class="bx bx-log-out text-xl"></i> Cerrar Sesion
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

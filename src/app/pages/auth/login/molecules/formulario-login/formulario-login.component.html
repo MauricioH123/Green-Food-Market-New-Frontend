@@ -1,0 +1,16 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="card w-96 bg-white shadow-xl p-6">
+        <h2 class="text-2xl font-bold text-center mb-4">Iniciar sesión</h2>
+        <form [formGroup]="formularioInicio" (ngSubmit)="envioAlPadre()" >
+            <div class="form-control mb-4">
+                <label class="label"><span class="label-text">Correo electrónico</span></label>
+                <input type="email" placeholder="Ingresa tu correo" class="input input-bordered w-full" formControlName="email" required>
+            </div>
+            <div class="form-control mb-4">
+                <label class="label"><span class="label-text">Contraseña</span></label>
+                <input type="password" placeholder="Ingresa tu contraseña" class="input input-bordered w-full" formControlName="password" required>
+            </div>
+            <button class="btn btn-primary w-full" type="submit">Ingresar</button>
+        </form>
+    </div>
+</div>

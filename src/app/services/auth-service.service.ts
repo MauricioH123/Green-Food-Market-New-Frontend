@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { InisioSesion } from '../models/inisio-sesion';
 
 @Injectable({
@@ -13,8 +13,11 @@ export class AuthServiceService {
 
   constructor() { }
 
-  postLogin(email: string, password:string):Observable<InisioSesion>{
-    const body = { email, password };
-    return this.http.post<InisioSesion>(this.apiUrl + "/login" , body)
+  login(credenciales: InisioSesion):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/login`, credenciales).pipe(tap(response =>{
+      if(response && response.access_token){
+        sessionStorage.setItem("auth_token", response.access_token)
+      }
+    }))
   }
 }

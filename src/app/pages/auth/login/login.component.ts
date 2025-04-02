@@ -4,6 +4,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { FormularioLoginComponent } from './molecules/formulario-login/formulario-login.component';
 import { AuthServiceService } from '../../../services/auth-service.service';
 import { InisioSesion } from '../../../models/inisio-sesion';
+import { error } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,17 @@ export class LoginComponent {
 
   serviceOuth = inject(AuthServiceService);
 
+
+
   recibirCredenciales(datos:InisioSesion){
-    console.log(datos)
+    this.serviceOuth.login(datos).subscribe({
+      next: (response) =>{
+        console.log('Login exitoso', response)
+      },
+      error: (error) =>{
+        console.log("error ", error)
+      }
+    })
   }
 
   

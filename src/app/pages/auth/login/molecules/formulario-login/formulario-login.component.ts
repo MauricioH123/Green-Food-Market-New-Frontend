@@ -1,4 +1,4 @@
-import { Component, Output,EventEmitter } from '@angular/core';
+import { Component, Output,EventEmitter, Input } from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormGroup, FormControl} from '@angular/forms';
 import { InisioSesion } from '../../../../../models/inisio-sesion';
@@ -10,6 +10,10 @@ import { InisioSesion } from '../../../../../models/inisio-sesion';
   styleUrl: './formulario-login.component.css'
 })
 export class FormularioLoginComponent {
+
+  @Input() mensajeError!:string
+
+
   formularioInicio = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')

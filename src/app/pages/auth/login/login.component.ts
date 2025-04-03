@@ -15,20 +15,25 @@ import { error } from 'console';
 export class LoginComponent {
 
   serviceOuth = inject(AuthServiceService);
+  errorMensaje: string = '';
 
 
 
   recibirCredenciales(datos:InisioSesion){
     this.serviceOuth.login(datos).subscribe({
       next: (response) =>{
-        console.log('Login exitoso', response)
+        console.log('Login exitoso', response);
+        this.errorMensaje = '';
       },
       error: (error) =>{
-        console.log("error ", error)
+        console.log("error ", error);
+        this.errorMensaje = error;
       }
     })
   }
 
   
+
+
 
 }

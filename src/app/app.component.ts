@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from './layout/footer/footer.component';
-import { SiderbarComponent } from './layout/siderbar/siderbar.component';
-import { LoginComponent } from "./pages/auth/login/login.component";
-
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LoginComponent],
+  imports: [RouterOutlet,RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

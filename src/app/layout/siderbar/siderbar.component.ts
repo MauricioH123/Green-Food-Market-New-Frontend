@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthServiceService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-siderbar',
@@ -8,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class SiderbarComponent {
 
+  authService = inject(AuthServiceService);
+
+  cerrarSesion(){
+    return this.authService.logout()
+  }
 }

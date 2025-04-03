@@ -7,7 +7,7 @@
         </svg>
       </div>
       <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
-        <li><a>Inicio</a></li>
+        <li><a routerLink="/homes">Inicio</a></li>
         <li>
           <details open>
             <summary>Facturas</summary>
@@ -19,12 +19,14 @@
         </li>
       </ul>
     </div>
-    <a class="btn btn-ghost text-xl"><img ngSrc="logos/logoG.jpg" alt="logo Green Food" width="32" height="32"></a>
+    <a class="btn btn-ghost text-xl" routerLink="/homes">
+      <img ngSrc="logos/logoG.jpg" alt="logo Green Food" width="32" height="32">
+    </a>
   </div>
 
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
-      <li><a>Inicio</a></li>
+      <li><a routerLink="/homes">Inicio</a></li>
       <li>
         <details>
           <summary>Facturas</summary>

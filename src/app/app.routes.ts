@@ -6,8 +6,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {path:'', title:'Login', component: LoginComponent, canActivate:[loginGuard] },
-    {path:'homes', title:'home', component: MainLayoutComponent, canActivate: [authGuard], children:[
-        {path:'', title:'dashboard', component:DashboardComponent}
+    {path:'homes', title:'Green Food Market', component: MainLayoutComponent, canActivate: [authGuard], children:[
+        {path:'', component:DashboardComponent}
     ] },
 
 ];

@@ -8,8 +8,10 @@ import { tokenInterceptor } from './app/interceptores/token.interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(withInterceptors([tokenInterceptor])),
-    // provideHttpClient(withFetch()),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([tokenInterceptor])
+    ),
     provideRouter(routes)
   ]
 });

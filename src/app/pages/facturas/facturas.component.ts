@@ -30,6 +30,10 @@ export class FacturasComponent implements OnInit {
     this.clientesRelacionados = this.clientes.filter(cliente => cliente.nombre.toLowerCase().includes(nomrbe))
   }
 
+  idCliente(id:number){
+    console.log(id);
+  }
+
   enviarFactura(factura:FacturaRequest){
     
   }

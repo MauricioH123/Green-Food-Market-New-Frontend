@@ -13,15 +13,29 @@ export class CrearFacturasComponent implements OnInit {
 
   @Output() ValoresInputNombre = new EventEmitter<any>();
   @Input() clientes!:Clientes[];
+  @Output() clienteSeleccionado = new EventEmitter<number>();
 
 
   facturaForm = new FormGroup({
     cliente: new FormControl(''),
   });
 
+  extraerId(valor: string):number | null{
+    const match = valor.match(/ID:(\d+)/);
+    return match ? parseInt(match[1]) : null;
+  }
+
   enviarNombreCliente(){
     this.facturaForm.get("cliente")?.valueChanges.subscribe(valor => {
-      this.ValoresInputNombre.emit( valor?.toLowerCase() || "");
+      if (valor !== null) {
+        const idExtraído = this.extraerId(valor);
+  
+        if (idExtraído !== null) {
+          this.clienteSeleccionado.emit(idExtraído);
+        }
+  
+        this.ValoresInputNombre.emit(valor.toLowerCase());
+      }
     })
   }  
 

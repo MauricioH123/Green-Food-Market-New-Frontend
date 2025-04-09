@@ -12,7 +12,7 @@
 
                 <datalist id="listaClientes">
                     @for ( cliente of clientes; track cliente.id) {
-                        <option [value]="cliente.nombre">{{ cliente.correo }}</option>
+                        <option [value]="cliente.nombre + ' - ID:' + cliente.id"></option>
                     }
                 </datalist>
 

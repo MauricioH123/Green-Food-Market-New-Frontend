@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms'
 import { Clientes } from '../../../../models/clientes';
@@ -9,15 +9,20 @@ import { Clientes } from '../../../../models/clientes';
   templateUrl: './crear-facturas.component.html',
   styleUrl: './crear-facturas.component.css'
 })
-export class CrearFacturasComponent implements OnInit {
+export class CrearFacturasComponent implements OnInit, OnChanges {
 
   @Output() ValoresInputNombre = new EventEmitter<any>();
   @Input() clientes!:Clientes[];
   @Output() clienteSeleccionado = new EventEmitter<number>();
+  @Input() cliente!:Clientes;
 
 
   facturaForm = new FormGroup({
     cliente: new FormControl(''),
+    correo: new FormControl(''),
+    direccion: new FormControl(''),
+    numero: new FormControl(''),
+    nombreProducto: new FormControl('')
   });
 
   extraerId(valor: string):number | null{
@@ -39,7 +44,20 @@ export class CrearFacturasComponent implements OnInit {
     })
   }  
 
+
   ngOnInit(): void{
     this.enviarNombreCliente();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      if(changes['cliente'] && changes['cliente'].currentValue){
+        const clienteActual = changes['cliente'].currentValue as Clientes;
+
+        this.facturaForm.patchValue({
+          correo: clienteActual.correo,
+          direccion:clienteActual.direccion,
+          numero: clienteActual.celular
+        })
+      }
   }
 }

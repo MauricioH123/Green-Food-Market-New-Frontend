@@ -17,7 +17,8 @@ export class FacturasComponent implements OnInit {
 
   clientes:Clientes[] = []
   clientesRelacionados!:Clientes[]
-
+  idCliente!:number;
+  cliente!:Clientes;
   
 
   mostrarClientes(){
@@ -30,9 +31,18 @@ export class FacturasComponent implements OnInit {
     this.clientesRelacionados = this.clientes.filter(cliente => cliente.nombre.toLowerCase().includes(nomrbe))
   }
 
-  idCliente(id:number){
-    console.log(id);
+  asiganrIdCliente(id:number){
+    this.idCliente = id;
+    const clienteEncontrado = this.clientes.find(cliente => cliente.id === this.idCliente)
+    if(clienteEncontrado){
+      this.cliente = clienteEncontrado;
+    }
+
   }
+
+  
+
+
 
   enviarFactura(factura:FacturaRequest){
     

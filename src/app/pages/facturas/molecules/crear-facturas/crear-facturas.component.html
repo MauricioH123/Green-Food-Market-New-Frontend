@@ -3,20 +3,55 @@
         <h2 class="text-2xl font-bold mb-6 text-center">Crear Factura</h2>
 
         <form [formGroup]="facturaForm">
+
+            <div class="col-span-4 my-6">
+                <hr class="border-t-2 border-gray-300" />
+                <h3 class="text-xl font-semibold text-gray-700 mt-4">Datos del Cliente</h3>
+            </div>
+
             <div class="grid grid-cols-4 gap-4">
 
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Nombre Cliente</legend>
-                    <input type="text" class="input" placeholder="Nombre Cliente" list="listaClientes" formControlName="cliente"/>
-                </fieldset> 
+                    <input type="text" class="input" placeholder="Nombre Cliente" list="listaClientes"
+                        formControlName="cliente" />
+                </fieldset>
 
                 <datalist id="listaClientes">
                     @for ( cliente of clientes; track cliente.id) {
-                        <option [value]="cliente.nombre + ' - ID:' + cliente.id"></option>
+                    <option [value]="cliente.nombre + ' - ID:' + cliente.id"></option>
                     }
                 </datalist>
 
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Correo Electronico</legend>
+                    <input type="text" class="input" placeholder="Correo electronico" formControlName="correo"/>
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Dirección</legend>
+                    <input type="text" class="input" placeholder="Dirección" formControlName="direccion" />
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Numero de Contacto</legend>
+                    <input type="text" class="input" placeholder="Numero" formControlName="numero" />
+                </fieldset>
+
             </div>
+
+            <div class="col-span-4 my-6">
+                <hr class="border-t-2 border-gray-300" />
+                <h3 class="text-xl font-semibold text-gray-700 mt-4">Productos a Facturar</h3>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4">
+
+
+            </div>
+
+
 
 
 

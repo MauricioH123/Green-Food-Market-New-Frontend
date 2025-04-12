@@ -3,6 +3,7 @@ import {FormGroup, FormControl, FormArray} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms'
 import { Clientes } from '../../../../models/clientes';
 import { Producto } from '../../../../models/producto';
+import { Pagos } from '../../../../models/pagos';
 
 @Component({
   selector: 'app-crear-facturas',
@@ -17,7 +18,7 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
   @Output() clienteSeleccionado = new EventEmitter<number>();
   @Input() cliente!:Clientes;
   @Input() productos!:Producto[];
-
+  @Input() Pagos!:Pagos[];
 
   facturaForm = new FormGroup({
     cliente: new FormControl(''),
@@ -30,7 +31,8 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
         cantidad: new FormControl(1),
         precio: new FormControl(0),
       })
-    ])
+    ]),
+    tipo_pago_id: new FormControl(''),
   });
 
   extraerId(valor: string):number | null{

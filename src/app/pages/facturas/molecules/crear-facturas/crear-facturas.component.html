@@ -75,13 +75,24 @@
                             <input type="number" class="input" placeholder="Cantidad" formControlName="cantidad" />
                         </fieldset>
                         
-                        <button type="button" (click)="eliminarProducto($index)" class="btn">X</button>
+                        
+                        <button type="button" (click)="eliminarProducto($index)" class="btn m-8">Eliminar</button>
         
                     </div>
-                }
-
-                  <button type="button" (click)="agregarProducto()" class="btn">Agregar Producto</button>
-
+                } 
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Tipo de pago</legend>
+                    <select class="select" formControlName="tipo_pago_id">
+                        <option disabled selected>Selecciona el tipo de pago</option>
+                        @for ( pago of Pagos; track pago.id) {
+                            <option [value]="pago.id" >{{pago.tipo}}</option>
+                        }
+                    </select>
+                </fieldset>
+                
+                <button type="button" (click)="agregarProducto()" class="btn col-start-4 col-end-5 m-8">Agregar Producto</button>
             </div>
 
               <button type="submit" class="btn">Enviar Factura</button>

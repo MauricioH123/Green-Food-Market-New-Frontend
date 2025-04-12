@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
+import {FormGroup, FormControl, FormArray} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms'
 import { Clientes } from '../../../../models/clientes';
+import { Producto } from '../../../../models/producto';
 
 @Component({
   selector: 'app-crear-facturas',
@@ -15,6 +16,7 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
   @Input() clientes!:Clientes[];
   @Output() clienteSeleccionado = new EventEmitter<number>();
   @Input() cliente!:Clientes;
+  @Input() productos!:Producto[];
 
 
   facturaForm = new FormGroup({
@@ -22,7 +24,13 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
     correo: new FormControl(''),
     direccion: new FormControl(''),
     numero: new FormControl(''),
-    nombreProducto: new FormControl('')
+    productos: new FormArray([
+      new FormGroup({
+        idProducto: new FormControl(),
+        cantidad: new FormControl(1),
+        precio: new FormControl(0),
+      })
+    ])
   });
 
   extraerId(valor: string):number | null{
@@ -43,6 +51,27 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
       }
     })
   }  
+
+  get productoss():FormArray{
+    return this.facturaForm.get('productos') as FormArray;
+  }
+
+  agregarProducto(){
+    const nuevoProducto = new FormGroup({
+      idProducto: new FormControl(),
+      cantidad: new FormControl(1),
+      precio: new FormControl(0),
+    });
+    this.productoss.push(nuevoProducto);
+  }
+
+  eliminarProducto(index:number){
+    this.productoss.removeAt(index);
+  }
+
+  enviar(){
+    console.log(this.facturaForm.value);
+  }
 
 
   ngOnInit(): void{

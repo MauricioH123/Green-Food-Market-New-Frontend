@@ -9,7 +9,7 @@ import { Producto } from '../models/producto';
 export class ProductosServiceService {
   
   private http = inject(HttpClient)
-  private apiUrl = "http://127.0.0.1:8000/api/productos"
+  private apiUrl = "http://127.0.0.1:8000/api/productos/factura"
 
   constructor() { }
 

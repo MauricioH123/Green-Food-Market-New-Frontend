@@ -4,6 +4,8 @@ import { FacturaServiceService } from '../../services/factura-service.service';
 import { FacturaRequest } from '../../models/factura-request';
 import { ClientesServiceService } from '../../services/clientes-service.service';
 import { Clientes } from '../../models/clientes';
+import { ProductosServiceService } from '../../services/productos-service.service';
+import { Producto } from '../../models/producto';
 
 @Component({
   selector: 'app-facturas',
@@ -14,11 +16,13 @@ import { Clientes } from '../../models/clientes';
 export class FacturasComponent implements OnInit {
   serviceFactura = inject(FacturaServiceService);
   serviceClientes = inject(ClientesServiceService);
+  serviceProducto = inject(ProductosServiceService);
 
   clientes:Clientes[] = []
   clientesRelacionados!:Clientes[]
   idCliente!:number;
   cliente!:Clientes;
+  productosList: Producto[] = [];
   
 
   mostrarClientes(){
@@ -40,7 +44,12 @@ export class FacturasComponent implements OnInit {
 
   }
 
-  
+  productos(){
+    this.serviceProducto.getProductos().subscribe((productos:Producto[])=>{
+      this.productosList = productos
+      // console.log(this.productosList)
+    });
+  }
 
 
 
@@ -49,7 +58,8 @@ export class FacturasComponent implements OnInit {
   }
   ngOnInit(){
     this.mostrarClientes();
+    this.productos();
   }
 
-  
+
 }

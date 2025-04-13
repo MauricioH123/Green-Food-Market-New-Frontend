@@ -58,15 +58,19 @@ export class FacturasComponent implements OnInit {
   listaPagos(){
     this.ServicePagos.listarPagos().subscribe( (pagos:Pagos[])=>{
       this.pagosLista = pagos
-      console.log(this.pagosLista)
+      // console.log(this.pagosLista)
     });
   }
 
 
 
   enviarFactura(factura:FacturaRequest){
-    
+    this.serviceFactura.crearFactura(factura).subscribe((response) =>{
+      
+    })
   }
+
+
   ngOnInit(){
     this.mostrarClientes();
     this.productos();

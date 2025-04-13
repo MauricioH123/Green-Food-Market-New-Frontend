@@ -4,6 +4,8 @@ import {ReactiveFormsModule} from '@angular/forms'
 import { Clientes } from '../../../../models/clientes';
 import { Producto } from '../../../../models/producto';
 import { Pagos } from '../../../../models/pagos';
+import { FacturaRequest } from '../../../../models/factura-request';
+import { DetalleProducto } from '../../../../models/detalle-producto';
 
 @Component({
   selector: 'app-crear-facturas',
@@ -19,6 +21,8 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
   @Input() cliente!:Clientes;
   @Input() productos!:Producto[];
   @Input() Pagos!:Pagos[];
+  @Output() factura = new EventEmitter<FacturaRequest>();
+
 
   facturaForm = new FormGroup({
     cliente: new FormControl(''),
@@ -71,9 +75,30 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
     this.productoss.removeAt(index);
   }
 
-  enviar(){
-    console.log(this.facturaForm.value);
+  enviar():void {
+    const datosOriginales = this.facturaForm.value;
+
+    if(datosOriginales.cliente && datosOriginales.tipo_pago_id){
+      const cliente_id = parseInt(datosOriginales.cliente.split('ID:')[1]);
+      const productosTransformados:DetalleProducto[] = (datosOriginales.productos?? []).map((p:any)=>({
+        producto_id:parseInt(p.idProducto),
+        cantidad: parseInt(p.cantidad),
+        precio_unitario: parseFloat(p.precio)
+      }));
+  
+      const facturaTransformada:FacturaRequest ={
+        cliente_id: cliente_id,
+        fecha: new Date().toISOString().split('T')[0],
+        productos: productosTransformados,
+        tipo_pago_id: parseInt(datosOriginales.tipo_pago_id)
+      }
+      this.factura.emit(facturaTransformada);
+    }
+    return undefined;
   }
+
+
+
 
 
   ngOnInit(): void{

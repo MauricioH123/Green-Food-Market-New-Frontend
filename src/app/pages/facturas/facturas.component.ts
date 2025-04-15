@@ -26,7 +26,8 @@ export class FacturasComponent implements OnInit {
   idCliente!:number;
   cliente!:Clientes;
   productosList: Producto[] = [];
-  pagosLista: Pagos[] = []
+  pagosLista: Pagos[] = [];
+  formatearFormulario = false;
   
 
   mostrarClientes(){
@@ -65,9 +66,20 @@ export class FacturasComponent implements OnInit {
 
 
   enviarFactura(factura:FacturaRequest){
-    this.serviceFactura.crearFactura(factura).subscribe((response) =>{
-      
-    })
+    this.serviceFactura.crearFactura(factura).subscribe({
+      next: (response) =>{
+        this.formatearFormulario = true
+        setTimeout(() => this.formatearFormulario = false, 500);
+      },
+      error:(err) =>{
+        alert('❌ Hubo un error al enviar la factura');
+        this.formatearFormulario = false
+        console.log(err);
+      }
+    }
+
+
+    )
   }
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {FormGroup, FormControl, FormArray} from '@angular/forms';
+import {FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms'
 import { Clientes } from '../../../../models/clientes';
 import { Producto } from '../../../../models/producto';
@@ -25,18 +25,18 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
 
 
   facturaForm = new FormGroup({
-    cliente: new FormControl(''),
-    correo: new FormControl(''),
-    direccion: new FormControl(''),
-    numero: new FormControl(''),
+    cliente: new FormControl('', Validators.required),
+    correo: new FormControl('', [Validators.required, Validators.email]),
+    direccion: new FormControl('', Validators.required),
+    numero: new FormControl('', Validators.required),
     productos: new FormArray([
       new FormGroup({
-        idProducto: new FormControl(),
-        cantidad: new FormControl(1),
-        precio: new FormControl(0),
+        idProducto: new FormControl(null, Validators.required),
+        cantidad: new FormControl(1, [Validators.required, Validators.min(1)]),
+        precio: new FormControl(0, [Validators.required, Validators.min(0.01)]),
       })
     ]),
-    tipo_pago_id: new FormControl(''),
+    tipo_pago_id: new FormControl('',[Validators.required]),
   });
 
   extraerId(valor: string):number | null{
@@ -64,9 +64,9 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
 
   agregarProducto(){
     const nuevoProducto = new FormGroup({
-      idProducto: new FormControl(),
-      cantidad: new FormControl(1),
-      precio: new FormControl(0),
+      idProducto: new FormControl(null, Validators.required),
+      cantidad: new FormControl(1, [Validators.required, Validators.min(1)]),
+      precio: new FormControl(0, [Validators.required, Validators.min(0.01)]),
     });
     this.productoss.push(nuevoProducto);
   }
@@ -93,10 +93,16 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
         tipo_pago_id: parseInt(datosOriginales.tipo_pago_id)
       }
       this.factura.emit(facturaTransformada);
+      this.facturaForm.reset();
+
+      while(this.productoss.length !== 0){
+        this.productoss.removeAt(0);
+      }
+
+      this.agregarProducto();
     }
     return undefined;
   }
-
 
 
 
@@ -115,5 +121,11 @@ export class CrearFacturasComponent implements OnInit, OnChanges {
           numero: clienteActual.celular
         })
       }
+
+      if(changes['reiniciar'] && changes['reiniciar'].currentValue === true) {
+        this.facturaForm.reset();
+      }
   }
+
+
 }

@@ -1,1 +1,1 @@
-<app-crear-factura-proveedor/>
+<app-crear-factura-proveedor (ValoresInputNombre)="relacionProveedor($event)" [proveedores]="proveedorRelacionados" (proveedorSeleccionado)="asiganrIdProveedor($event)" [proveedor]="proveedor" [productos]="productosList" (factura)="enviarFactura($event)" >

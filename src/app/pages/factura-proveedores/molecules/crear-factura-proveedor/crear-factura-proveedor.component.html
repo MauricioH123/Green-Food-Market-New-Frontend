@@ -1,2 +1,113 @@
-<p>crear-factura-proveedor works!</p>
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-4xl">
+        <h2 class="text-2xl font-bold mb-6 text-center">Crear Factura de Entrada</h2>
 
+        <form [formGroup]="facturaForm" (ngSubmit)="enviar()">
+
+            <div class="col-span-4 my-6">
+                <hr class="border-t-2 border-gray-300" />
+                <h3 class="text-xl font-semibold text-gray-700 mt-4">Datos del Proveedor</h3>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4">
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Nombre Proveedor</legend>
+                    <input type="text" class="input" placeholder="Nombre proveedor" list="listaProveedores"
+                        formControlName="proveedor" />
+                        @if(facturaForm.get('proveedor')?.invalid && facturaForm.get('proveedor')?.touched){
+                            <div class="text-red-500 text-sm">
+                                El nombre del proveedor es obligatorio
+                            </div>
+                        }
+                </fieldset>
+
+
+                <datalist id="listaProveedores">
+                    @for ( proveedor of proveedores; track proveedor.id) {
+                    <option [value]="proveedor.nombre_proveedor + ' - ID:' + proveedor.id"></option>
+                    }
+                </datalist>
+            </div>
+
+            <div class="col-span-4 my-6">
+                <hr class="border-t-2 border-gray-300" />
+                <h3 class="text-xl font-semibold text-gray-700 mt-4">Productos a Facturar</h3>
+            </div>
+
+
+            <div formArrayName="productos">
+
+                @for (producto of productoss.controls; track $index) {
+
+                <div class="grid grid-cols-4 gap-4" [formGroupName]="$index">
+
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend">Producto</legend>
+                        <select class="select" formControlName="idProducto">
+                            <option disabled selected>Selecciona el producto</option>
+                            @for ( producto of productos; track producto.id) {
+                            <option [value]="producto.id">{{producto.nombre_producto}}</option>
+                            }
+                        </select>
+                        @if(producto.get('idProducto')?.invalid && producto.get('idProducto')?.touched){
+                            <div class="text-red-500 text-sm">
+                                El producto es obligatorio
+                            </div>
+                        }
+                    </fieldset>
+
+
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend">Precio Unitario</legend>
+                        <input type="number" class="input" placeholder="Precio Unitario" formControlName="precio" />
+                        @if(producto.get('precio')?.invalid && producto.get('precio')?.touched){
+                            <div class="text-red-500 text-sm">
+                                El precio no puede ser 0
+                            </div>
+                        }
+                    </fieldset>
+
+
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend">Cantidad</legend>
+                        <input type="number" class="input" placeholder="Cantidad" formControlName="cantidad" />
+                        @if(producto.get('cantidad')?.invalid && producto.get('cantidad')?.touched){
+                            <div class="text-red-500 text-sm">
+                                La cantidad tine que mayor a 1
+                            </div>
+                        }
+                    </fieldset>
+
+
+                    <button type="button" (click)="eliminarProducto($index)" class="btn m-8">Eliminar</button>
+
+                </div>
+                }
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <button type="button" (click)="agregarProducto()" class="btn col-start-4 col-end-5 m-8">Agregar
+                    Producto</button>
+            </div>
+
+            <!-- Open the modal using ID.showModal() method -->
+            <button class="btn" type="submit" onclick="my_modal_1.showModal()" [disabled]="facturaForm.invalid">Crear Factura</button>
+            <dialog id="my_modal_1" class="modal">
+                <div class="modal-box">
+                    <h3 class="text-lg font-bold">Factura Creada!</h3>
+                    <p class="py-4">La factura fue creada exitosamente</p>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn">Cerrar</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+
+            <!-- <button type="submit" class="btn">Enviar Factura</button> -->
+
+        </form>
+    </div>
+
+</div>

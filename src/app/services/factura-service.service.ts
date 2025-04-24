@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { FacturaRequest } from '../models/factura-request';
 import { Observable } from 'rxjs';
 
@@ -11,7 +10,7 @@ export class FacturaServiceService {
 
   private http = inject(HttpClient);
   private apiUrl = "http://127.0.0.1:8000/api/facturas";
-  private router = inject(Router) 
+
 
   constructor() { }
 
@@ -19,4 +18,9 @@ export class FacturaServiceService {
     return this.http.post(this.apiUrl, data);
   }
 
+  listarFactura():Observable<>{
+    return this.http.get()
+  }
+
+  
 }

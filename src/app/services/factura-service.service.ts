@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { FacturaRequest } from '../models/factura-request';
 import { Observable } from 'rxjs';
+import { DetallePagos } from '../models/detalle-pagos';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,7 @@ export class FacturaServiceService {
     return this.http.post(this.apiUrl, data);
   }
 
-  listarFactura():Observable<>{
-    return this.http.get()
+  listarFactura():Observable<DetallePagos>{
+    return this.http.get<DetallePagos>(`${this.apiUrl}`)
   }
-
-  
 }

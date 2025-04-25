@@ -1,8 +1,9 @@
 import { FacturaCliente } from "./factura-cliente";
+import { TotalFactura } from "./total-factura";
 
 export interface DetallePagos {
     id:number,
-    factura_id: number,
     estado: number,
-    factura: FacturaCliente[]
+    nombre: string
+    total:number
 }

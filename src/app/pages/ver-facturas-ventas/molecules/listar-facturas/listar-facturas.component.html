@@ -1,49 +1,61 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-4xl">
-        <h2 class="text-2xl font-bold mb-6 text-center">Facturas Creadas</h2>
+  <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-4xl">
+    <h2 class="text-2xl font-bold mb-6 text-center">Facturas Creadas</h2>
 
 
-        <div class="overflow-x-auto">
-            <table class="table table-xs">
-              <thead>
-                <tr>
-                  <th>Numero Factura</th>
-                  <th>Cliente</th>
-                  <th>Total</th>
-                  <th>Estado</th>
-                  <th>Enviar Correo</th>
-                  <th>Imprimir</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (dato of datosLista; track dato.id) {
-                    <tr>
-                        <th>{{dato.id}}</th>
-                        <td>{{dato.nombre}}</td>
-                        <td>{{dato.total / 100 | currency:'COP ':'symbol' }} </td>
-                        @if (dato.estado === 1) {
-                            <td>Pago</td>
-                        }@else {
-                            <td>Credito</td>
-                        }
-                        <td>Canada</td>
-                        <td>12/16/2020</td>
-                      </tr>
-                }
+    <div class="overflow-x-auto">
+      <table class="table table-xs">
+        <thead>
+          <tr>
+            <th>Numero Factura</th>
+            <th>Cliente</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Enviar Correo</th>
+            <th>Imprimir</th>
+            <th>Actualizar Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (dato of datosLista; track dato.id) {
+          <tr>
+            <th>{{dato.id}}</th>
+            <td>{{dato.nombre}}</td>
+            <td>{{dato.total / 100 | currency:'COP ':'symbol' }} </td>
+            @if (dato.estado === 1) {
+            <td>Pago</td>
+            }@else {
+            <td>Credito</td>
+            }
+            <td>Canada</td>
+            <td>12/16/2020</td>
+            <td>
+              <button class="btn" (click)="abrirModal(dato); enviarEstadoFacturaAlPadre(dato.id, dato.estado)">Actualizar Estado</button>
+            </td>
+          </tr>
+          }
 
-              </tbody>
-              <tfoot>
-                <tr>
-                    <th>Numero Factura</th>
-                    <th>Cliente</th>
-                    <th>Total</th>
-                    <th>Estado</th>
-                    <th>Enviar Correo</th>
-                    <th>Imprimir</th>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Numero Factura</th>
+            <th>Cliente</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Enviar Correo</th>
+            <th>Imprimir</th>
+          </tr>
+        </tfoot>
+      </table>
     </div>
+  </div>
 
 </div>
+<dialog #modal class="modal" [open]="modalFacturaSeleccionada">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Estado de la Factura Actualizado</h3>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>Cerrar</button>
+  </form>
+</dialog>

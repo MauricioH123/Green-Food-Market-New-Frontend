@@ -2,6 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FacturaServiceService } from '../../services/factura-service.service';
 import { ListarFacturasComponent } from './molecules/listar-facturas/listar-facturas.component';
 import { PaginacionDetallePagos } from '../../models/paginacion-detalle-pagos';
+import { PagoServiceService } from '../../services/pago-service.service';
+import { EstadoFacturaService } from '../../services/estado-factura.service';
+import { PagoRequest } from '../../models/pago-request';
 
 @Component({
   selector: 'app-ver-facturas-ventas',
@@ -12,6 +15,8 @@ import { PaginacionDetallePagos } from '../../models/paginacion-detalle-pagos';
 export class VerFacturasVentasComponent implements OnInit {
   
   api = inject(FacturaServiceService);
+  apiEstados = inject(EstadoFacturaService);
+
 
   listaFactura:PaginacionDetallePagos = {
     current_page: 1,
@@ -29,6 +34,30 @@ export class VerFacturasVentasComponent implements OnInit {
       }
     );
   }
+
+  actulizarEstadoFactura(datos:PagoRequest){
+    const idFactura = datos.factura_id;
+    const estadoActualFactura = datos.estado;
+    let estadoActualizado:boolean;
+    if(estadoActualFactura === 1){
+      estadoActualizado = false;
+    }else{
+      estadoActualizado = true;
+    }
+
+    if(estadoActualizado !== null){
+      this.apiEstados.actualizarEstado(estadoActualizado, idFactura).subscribe({
+        next: (respuesta) =>{
+          console.log('Estado actualizado correctamente:', respuesta)
+        },
+        error: (error) =>{
+          console.error('Error al actualizar el estado:', error);
+        }
+        })
+    }
+
+  }
+
 
   ngOnInit(): void {
       this.datosFactura()

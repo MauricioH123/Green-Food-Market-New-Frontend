@@ -17,6 +17,9 @@ export class VerFacturasVentasComponent implements OnInit {
   api = inject(FacturaServiceService);
   apiEstados = inject(EstadoFacturaService);
 
+  paginaActual = 1;
+  paginaSiguiente!:number;
+
 
   listaFactura:PaginacionDetallePagos = {
     current_page: 1,
@@ -26,10 +29,12 @@ export class VerFacturasVentasComponent implements OnInit {
     last_page: 1
   };
 
-  datosFactura(){
-    this.api.listarFactura().subscribe(
+  datosFactura(page: number = 1){
+    this.api.listarFactura(page).subscribe(
       (data:PaginacionDetallePagos) => {
         this.listaFactura = data;
+        this.paginaActual = data.current_page;
+        this.paginaSiguiente = data.last_page;
         console.log(data);
       }
     );
@@ -56,6 +61,14 @@ export class VerFacturasVentasComponent implements OnInit {
         })
     }
 
+  }
+  
+  siguientePagina(pagina: number){
+    this.datosFactura(pagina);
+  }
+
+  anteriorPagina(pagina: number){
+    this.datosFactura(pagina);
   }
 
 

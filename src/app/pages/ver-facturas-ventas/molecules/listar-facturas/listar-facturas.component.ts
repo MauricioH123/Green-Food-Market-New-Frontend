@@ -16,6 +16,10 @@ export class ListarFacturasComponent {
   @Input() datosLista!:DetallePagos[];
   @Input() total!:TotalFactura[];
   @Output() estadoFactura = new EventEmitter<PagoRequest>;
+  @Output() paginaSiguiente = new EventEmitter;
+  @Output() paginaAnterior = new EventEmitter;
+  @Input() paginaActual!:number;
+  @Input() paginaSiguienteA!:number;
   modalFacturaSeleccionada: any = null;
   
   abrirModal(dato: any) {
@@ -32,6 +36,23 @@ export class ListarFacturasComponent {
       estado:estadoFactura,
     })
   }
+
+  enviarSiguientePagina(pagina:number){
+    if(this.paginaActual === this.paginaSiguienteA){
+      this.paginaSiguiente.emit(pagina);
+      return
+    }
+    this.paginaSiguiente.emit(pagina + 1);
+  }
+
+  enviarAnteriorPagina(pagina:number){
+    if(this.paginaActual === 1){
+      this.paginaAnterior.emit(pagina);
+      return 
+    }
+    this.paginaAnterior.emit(pagina - 1);
+  }
+  
 
 
 

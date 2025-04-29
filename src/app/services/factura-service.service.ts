@@ -19,7 +19,7 @@ export class FacturaServiceService {
     return this.http.post(this.apiUrl, data);
   }
 
-  listarFactura():Observable<PaginacionDetallePagos>{
-    return this.http.get<PaginacionDetallePagos>(`${this.apiUrl}`)
+  listarFactura(page:number = 1):Observable<PaginacionDetallePagos>{
+    return this.http.get<PaginacionDetallePagos>(`${this.apiUrl}?page=${page}`)
   }
 }

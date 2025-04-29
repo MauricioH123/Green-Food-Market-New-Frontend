@@ -48,9 +48,18 @@
         </tfoot>
       </table>
     </div>
-  </div>
 
+
+    <div class="grid grid-cols-5 gap-1">
+      <div class="join col-start-3 col-end-3 mt-5">
+        <button class="join-item btn" (click)="enviarAnteriorPagina(paginaActual)">«</button>
+        <button class="join-item btn">Pagina {{paginaActual}}</button>
+        <button class="join-item btn" (click)="enviarSiguientePagina(paginaActual)">»</button>
+      </div>
+    </div>
+  </div>
 </div>
+
 <dialog #modal class="modal" [open]="modalFacturaSeleccionada">
   <div class="modal-box">
     <h3 class="text-lg font-bold">Estado de la Factura Actualizado</h3>

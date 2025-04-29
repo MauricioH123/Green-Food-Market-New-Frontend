@@ -34,7 +34,7 @@ export class VerFacturasVentasComponent implements OnInit {
         this.listaFactura = data;
         this.paginaActual = data.current_page;
         this.paginaSiguiente = data.last_page;
-        console.log(data);
+        // console.log(data);
       }
     );
   }
@@ -70,8 +70,17 @@ export class VerFacturasVentasComponent implements OnInit {
     this.datosFactura(pagina);
   }
 
+  // pruebaDetalleF(){
+  //   this.api.listarDetalleFactura(42).subscribe((data)=>{
+  //     console.log(data)
+  //   }
+  //   )
+  // }
+
 
   ngOnInit(): void {
-      this.datosFactura()
+      this.datosFactura();
+      // this.pruebaDetalleF();
+
   }
 }

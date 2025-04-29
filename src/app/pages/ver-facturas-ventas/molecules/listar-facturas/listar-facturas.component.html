@@ -23,9 +23,19 @@
             <td>{{dato.nombre}}</td>
             <td>{{dato.total / 100 | currency:'COP ':'symbol' }} </td>
             @if (dato.estado === 1) {
-            <td>Pago</td>
+            <td>
+              <div class="inline-grid *:[grid-area:1/1]">
+                <div class="status status-accent"></div>
+                <div class="status status-accent"></div>
+              </div> Pago
+            </td>
             }@else {
-            <td>Credito</td>
+            <td>
+              <div class="inline-grid *:[grid-area:1/1]">
+                <div class="status status-error animate-ping"></div>
+                <div class="status status-error"></div>
+              </div> Credito
+            </td>
             }
             <td>Canada</td>
             <td>12/16/2020</td>

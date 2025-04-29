@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FacturaServiceService } from '../../services/factura-service.service';
 import { ListarFacturasComponent } from './molecules/listar-facturas/listar-facturas.component';
 import { PaginacionDetallePagos } from '../../models/paginacion-detalle-pagos';
-import { PagoServiceService } from '../../services/pago-service.service';
 import { EstadoFacturaService } from '../../services/estado-factura.service';
 import { PagoRequest } from '../../models/pago-request';
 

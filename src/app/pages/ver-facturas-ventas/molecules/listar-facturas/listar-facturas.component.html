@@ -20,7 +20,7 @@
           @for (dato of datosLista; track dato.id) {
           <tr>
             <th>{{dato.id}}</th>
-            <td>{{dato.nombre}}</td>
+            <td><a [routerLink]="['/homes','detalleFacturaCliente', dato.id]" class="link link-neutral">{{dato.nombre}}</a></td>
             <td>{{dato.total / 100 | currency:'COP ':'symbol' }} </td>
             @if (dato.estado === 1) {
             <td>

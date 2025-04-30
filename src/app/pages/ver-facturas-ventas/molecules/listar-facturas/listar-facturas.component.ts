@@ -4,10 +4,11 @@ import { TotalFactura } from '../../../../models/total-factura';
 import { CurrencyPipe } from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import { PagoRequest } from '../../../../models/pago-request';
+import {RouterOutlet, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-listar-facturas',
-  imports: [CurrencyPipe, ReactiveFormsModule],
+  imports: [CurrencyPipe, ReactiveFormsModule, RouterLink],
   templateUrl: './listar-facturas.component.html',
   styleUrl: './listar-facturas.component.css'
 })

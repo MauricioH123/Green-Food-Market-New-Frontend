@@ -1,0 +1,90 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-5xl">
+      <h2 class="text-2xl font-bold mb-6 text-center">Detalle de Factura</h2>
+  
+      @defer (when datellesFactura) {
+        <!-- Detalles del Cliente -->
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div>
+            <h3 class="text-sm font-semibold text-gray-600">Nombre del Cliente</h3>
+            <p class="text-base text-gray-800">{{ datellesFactura.cliente?.nombre }}</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-gray-600">Dirección</h3>
+            <p class="text-base text-gray-800">{{ datellesFactura.cliente?.direccion }}</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-gray-600">Número de Factura</h3>
+            <p class="text-base text-gray-800">{{ datellesFactura.id }}</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-gray-600">Fecha</h3>
+            <p class="text-base text-gray-800">{{ datellesFactura.fecha }}</p>
+          </div>
+        </div>
+  
+        <!-- Tabla de Productos -->
+        <div class="overflow-x-auto">
+          <table class="table table-zebra w-full">
+            <thead class="bg-base-200">
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (item of datellesFactura.detalle_factura; track $index) {
+                    <tr>
+                        <td>{{ item.producto?.nombre_producto }}</td>
+                        <td>{{ item.cantidad }}</td>
+                        <td>{{ item.precio_unitario | currency:'COP ' }}</td>
+                        <td>{{ item.precio_unitario * item.cantidad| currency:'COP ' }}</td>
+                      </tr>
+                }
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4">
+            <div class="mt-6 flex justify-end col-start-1 col-end-2">
+                <div class="text-right">
+                  <h3 class="text-xl font-bold">Forma de pago:</h3>
+                  @for (item of datellesFactura.detalle_pago; track $index) {
+                    <p class="text-lg text-green-700 font-semibold">{{item.tipo_pago.tipo}}</p>
+                  }
+                </div>
+              </div>
+
+
+            <div class="mt-6 flex justify-end col-start-4 col-end-4">
+                <div class="text-right">
+                  <h3 class="text-xl font-bold">Total General:</h3>
+                  <p class="text-lg text-green-700 font-semibold">
+                    {{ totalFactua  | currency:'COP '}}
+                  </p>
+                </div>
+              </div>
+
+
+        </div>
+
+        
+      } @loading {
+        <div class="text-center text-gray-500 py-10">
+          <p>Cargando detalles de la factura...</p>
+        </div>
+      } @placeholder {
+        <div class="text-center text-gray-400 py-10">
+          <p>Esperando los datos de la factura...</p>
+        </div>
+      } @error {
+        <div class="text-center text-red-500 py-10">
+          <p>Ocurrió un error al cargar la factura.</p>
+        </div>
+      }
+    </div>
+  </div>
+  

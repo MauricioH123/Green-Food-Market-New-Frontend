@@ -6,6 +6,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FacturasComponent } from './pages/facturas/facturas.component';
 import { FacturaProveedoresComponent } from './pages/factura-proveedores/factura-proveedores.component';
 import { VerFacturasVentasComponent } from './pages/ver-facturas-ventas/ver-facturas-ventas.component';
+import { VerDetalleFacturaClienteComponent } from './pages/ver-detalle-factura-cliente/ver-detalle-factura-cliente.component';
 
 export const routes: Routes = [
     {path:'', title:'Login', component: LoginComponent, canActivate:[loginGuard] },
@@ -14,6 +15,7 @@ export const routes: Routes = [
         {path:'crearFactura', component:FacturasComponent},
         {path: 'crearFacturaCompra', component:FacturaProveedoresComponent},
         {path: 'verFacturaCliente', component:VerFacturasVentasComponent},
+        {path: 'detalleFacturaCliente/:id', component: VerDetalleFacturaClienteComponent}
     ] },
 
 ];

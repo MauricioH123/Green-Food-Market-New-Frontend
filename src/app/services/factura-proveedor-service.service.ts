@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FacturaProveedor } from '../models/factura-proveedor';
+import { PaginacionFacturaProveedor } from '../models/paginacion-factura-proveedor';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +14,9 @@ export class FacturaProveedorServiceService {
 
   crearFacturaProveedor(data:FacturaProveedor):Observable<any>{
     return this.http.post(this.apiUrl, data)
+  }
+
+  listarFacturasProveedor(page:number = 1):Observable<PaginacionFacturaProveedor>{
+    return this.http.get<PaginacionFacturaProveedor>(`${this.apiUrl}?page=${page}`)
   }
 }

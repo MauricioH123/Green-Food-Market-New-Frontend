@@ -39,8 +39,8 @@
                     <tr>
                         <td>{{ item.producto?.nombre_producto }}</td>
                         <td>{{ item.cantidad }}</td>
-                        <td>{{ item.precio_unitario / 100 | currency:'COP ' }}</td>
-                        <td>{{ item.precio_unitario * item.cantidad / 100 | currency:'COP ' }}</td>
+                        <td>{{ item.precio_unitario  | currency:'COP ' }}</td>
+                        <td>{{ item.precio_unitario * item.cantidad | currency:'COP ' }}</td>
                       </tr>
                 }
 
@@ -63,7 +63,7 @@
                 <div class="text-right">
                   <h3 class="text-xl font-bold">Total General:</h3>
                   <p class="text-lg text-green-700 font-semibold">
-                    {{ totalFactua  | currency:'COP '}}
+                    {{ totalFactua | currency:'COP '}}
                   </p>
                 </div>
               </div>

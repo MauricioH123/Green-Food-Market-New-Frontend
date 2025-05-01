@@ -1,25 +1,21 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
     <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-5xl">
-      <h2 class="text-2xl font-bold mb-6 text-center">Detalle de Factura</h2>
+      <h2 class="text-2xl font-bold mb-6 text-center">Detalle de Factura Compra</h2>
   
       @defer (when datellesFactura) {
         <!-- Detalles del Cliente -->
         <div class="grid grid-cols-2 gap-6 mb-8">
           <div>
-            <h3 class="text-sm font-semibold text-gray-600">Nombre del Cliente</h3>
-            <p class="text-base text-gray-800">{{ datellesFactura.cliente.nombre }}</p>
-          </div>
-          <div>
-            <h3 class="text-sm font-semibold text-gray-600">Dirección</h3>
-            <p class="text-base text-gray-800">{{ datellesFactura.cliente.direccion }}</p>
+            <h3 class="text-sm font-semibold text-gray-600">Nombre del Proveedor</h3>
+            <p class="text-base text-gray-800">{{ datellesFactura.nombre_proveedor }}</p>
           </div>
           <div>
             <h3 class="text-sm font-semibold text-gray-600">Número de Factura</h3>
-            <p class="text-base text-gray-800">{{ datellesFactura.id }}</p>
+            <p class="text-base text-gray-800">{{ datellesFactura.entrada_id }}</p>
           </div>
           <div>
             <h3 class="text-sm font-semibold text-gray-600">Fecha</h3>
-            <p class="text-base text-gray-800">{{ datellesFactura.fecha }}</p>
+            <p class="text-base text-gray-800">{{ datellesFactura.fecha_entrada }}</p>
           </div>
         </div>
   
@@ -35,12 +31,12 @@
               </tr>
             </thead>
             <tbody>
-                @for (item of datellesFactura.detalle_factura; track $index) {
+                @for (item of datellesFactura.productos; track $index) {
                     <tr>
-                        <td>{{ item.producto?.nombre_producto }}</td>
+                        <td>{{ item.nombre_producto }}</td>
                         <td>{{ item.cantidad }}</td>
-                        <td>{{ item.precio_unitario / 100 | currency:'COP ' }}</td>
-                        <td>{{ item.precio_unitario * item.cantidad / 100 | currency:'COP ' }}</td>
+                        <td>{{ item.precio_compra/100 | currency:'COP ' }}</td>
+                        <td>{{ (item.precio_compra * item.cantidad)/100| currency:'COP ' }}</td>
                       </tr>
                 }
 
@@ -49,26 +45,14 @@
         </div>
 
         <div class="grid grid-cols-4 gap-4">
-            <div class="mt-6 flex justify-end col-start-1 col-end-2">
-                <div class="text-right">
-                  <h3 class="text-xl font-bold">Forma de pago:</h3>
-                  @for (item of datellesFactura.detalle_pago; track $index) {
-                    <p class="text-lg text-green-700 font-semibold">{{item.tipo_pago.tipo}}</p>
-                  }
-                </div>
-              </div>
-
-
             <div class="mt-6 flex justify-end col-start-4 col-end-4">
                 <div class="text-right">
                   <h3 class="text-xl font-bold">Total General:</h3>
                   <p class="text-lg text-green-700 font-semibold">
-                    {{ totalFactua  | currency:'COP '}}
+                    {{ totalFactua /100 | currency:'COP '}}
                   </p>
                 </div>
               </div>
-
-
         </div>
 
         
@@ -80,11 +64,7 @@
         <!-- Skeleton loader para detalles del cliente -->
       <div class="grid grid-cols-2 gap-6 mb-8">
         <div>
-          <h3 class="text-sm font-semibold text-gray-600">Nombre del Cliente</h3>
-          <div class="h-6 bg-gray-200 rounded animate-pulse mt-1"></div>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold text-gray-600">Dirección</h3>
+          <h3 class="text-sm font-semibold text-gray-600">Nombre del Proveedor</h3>
           <div class="h-6 bg-gray-200 rounded animate-pulse mt-1"></div>
         </div>
         <div>
@@ -134,12 +114,6 @@
 
       <!-- Skeleton loader para el total y forma de pago -->
       <div class="grid grid-cols-4 gap-4 mt-6">
-        <div class="flex justify-end col-start-1 col-end-2">
-          <div class="text-right">
-            <h3 class="text-xl font-bold mb-2">Forma de pago:</h3>
-            <div class="h-6 bg-gray-200 rounded animate-pulse w-28 ml-auto"></div>
-          </div>
-        </div>
 
         <div class="flex justify-end col-start-4 col-end-4">
           <div class="text-right">

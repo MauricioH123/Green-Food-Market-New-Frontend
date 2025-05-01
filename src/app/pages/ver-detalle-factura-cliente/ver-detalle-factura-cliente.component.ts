@@ -24,7 +24,8 @@ datosFacturas(){
 
   this.facturaService.listarDetalleFactura(idFactura).subscribe((data:DetalleFacturaCliente) =>{
     this.detallesFactura = data;
-    console.log(data)
+    // console.log(data)
+    
     this.getTotalFactura();
   });
 }

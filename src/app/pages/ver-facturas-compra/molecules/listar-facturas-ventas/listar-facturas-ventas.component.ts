@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { PaginacionFacturaProveedor } from '../../../../models/paginacion-factura-proveedor';
 import { CurrencyPipe } from '@angular/common';
+import {RouterOutlet, RouterLink} from '@angular/router';
 
 
 @Component({
   selector: 'app-listar-facturas-ventas',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe,RouterLink],
   templateUrl: './listar-facturas-ventas.component.html',
   styleUrl: './listar-facturas-ventas.component.css'
 })

@@ -29,7 +29,7 @@ export class VerFacturasCompraComponent implements OnInit {
         this.datosDeFactura = data;
         this.paginaActual = data.current_page;
         this.paginaSiguiente = data.last_page;
-        console.log(data);
+        // console.log(data);
       }
     )
   }

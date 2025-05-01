@@ -8,6 +8,7 @@ import { FacturaProveedoresComponent } from './pages/factura-proveedores/factura
 import { VerFacturasVentasComponent } from './pages/ver-facturas-ventas/ver-facturas-ventas.component';
 import { VerDetalleFacturaClienteComponent } from './pages/ver-detalle-factura-cliente/ver-detalle-factura-cliente.component';
 import { VerFacturasCompraComponent } from './pages/ver-facturas-compra/ver-facturas-compra.component';
+import { VerDetalleFacturaComprasComponent } from './pages/ver-detalle-factura-compras/ver-detalle-factura-compras.component';
 
 export const routes: Routes = [
     {path:'', title:'Login', component: LoginComponent, canActivate:[loginGuard] },
@@ -18,6 +19,7 @@ export const routes: Routes = [
         {path: 'verFacturaCliente', component:VerFacturasVentasComponent},
         {path: 'detalleFacturaCliente/:id', component: VerDetalleFacturaClienteComponent},
         {path: 'verFacturasCompras', component: VerFacturasCompraComponent},
+        {path: 'detalleFacturaProveedor/:id', component: VerDetalleFacturaComprasComponent},
     ] },
 
 ];

@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FacturaProveedor } from '../models/factura-proveedor';
 import { PaginacionFacturaProveedor } from '../models/paginacion-factura-proveedor';
+import { DetalleFacturaProveedores } from '../models/detalle-factura-proveedores';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,9 @@ export class FacturaProveedorServiceService {
 
   listarFacturasProveedor(page:number = 1):Observable<PaginacionFacturaProveedor>{
     return this.http.get<PaginacionFacturaProveedor>(`${this.apiUrl}?page=${page}`)
+  }
+
+  listarDetallesProveedores(id:number):Observable<DetalleFacturaProveedores>{
+    return this.http.get<DetalleFacturaProveedores>(`${this.apiUrl}/${id}/detalle`)
   }
 }

@@ -1,1 +1,1 @@
-<app-listar-productos  />
+<app-listar-productos [productos]="productosInventario" [paginaActual]="paginaActual" (paginaSiguiente)="siguientePagina($event)" (paginaAnterior)="anteriorPagina($event)" [paginaSiguienteA]="paginaSiguiente" />

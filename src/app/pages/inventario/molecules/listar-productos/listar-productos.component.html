@@ -1,45 +1,94 @@
+@if (mostrarAlert === true) {
+  <div role="alert" class="alert alert-success">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Producto Actualizado</span>
+  </div>
+}
+
+
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-4xl">
-      <h2 class="text-2xl font-bold mb-6 text-center">Inventario de Productos</h2>
-  
-  
-      <div class="overflow-x-auto">
-        <table class="table table-xs">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Nombre</th>
-              <th>Nombre Proveedor</th>
-              <th>Cantidad</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (producto of productos.data; track producto.id) {
-                <tr>
-                    <td>{{producto.id}}</td>
-                    <td>{{producto.nombre_producto}}</td>
-                    <td>{{producto.nombre_proveedor}}</td>
-                    <td>{{producto.cantidad}}</td>
-                </tr>
-            }
+  <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-4xl">
+    <h2 class="text-2xl font-bold mb-6 text-center">Inventario de Productos</h2>
 
-          </tbody>
-          <tfoot>
-            <tr>
-                <th></th>
-                <th>Nombre</th>
-                <th>Nombre Proveedor</th>
-                <th>Cantidad</th>
-            </tr>
-          </tfoot>
-        </table>
+
+    <div class="overflow-x-auto">
+      <table class="table table-xs">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Nombre Proveedor</th>
+            <th>Cantidad</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (producto of productos.data; track producto.id) {
+          <tr>
+            <td>{{producto.id}}</td>
+            <td>{{producto.nombre_producto}}</td>
+            <td>{{producto.nombre_proveedor}}</td>
+            <td>{{producto.cantidad}}</td>
+            <td>
+              <button class="btn" onclick="my_modal_4.showModal()" (click)="obtenerProducto(producto.id)">Actualizar</button>
+            </td>
+          </tr>
+          }
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Nombre Proveedor</th>
+            <th>Cantidad</th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="grid grid-cols-5 gap-1">
+      <div class="join col-start-3 col-end-3 mt-5">
+        <button class="join-item btn" (click)="enviarAnteriorPagina(paginaActual)">«</button>
+        <button class="join-item btn">Pagina {{paginaActual}}</button>
+        <button class="join-item btn" (click)="enviarSiguientePagina(paginaActual)">»</button>
       </div>
+    </div>
+  </div>
 
-      <div class="grid grid-cols-5 gap-1">
-        <div class="join col-start-3 col-end-3 mt-5">
-          <button class="join-item btn" (click)="enviarAnteriorPagina(paginaActual)">«</button>
-          <button class="join-item btn">Pagina {{paginaActual}}</button>
-          <button class="join-item btn" (click)="enviarSiguientePagina(paginaActual)">»</button>
+  <dialog id="my_modal_4" class="modal">
+    <div class="modal-box w-11/12 max-w-5xl">
+      <h3 class="text-lg font-bold">Actualizar Producto</h3>
+      <form [formGroup]="actualizacionForm">
+
+        <div class="grid grid-cols-3 gap-4">
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Nombre</legend>
+            <input type="text" class="input" formControlName="nombre" />
+          </fieldset>
+  
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Proveedores</legend>
+            <select class="select" formControlName="idProveedor">
+              <option disabled>Elige el Proveedor</option>
+              @for (proveedor of proveedores; track proveedor.id) {
+                <option [value]="proveedor.id">{{proveedor.nombre_proveedor}}</option>
+              }
+            </select>
+          </fieldset>
+          <input type="number" class="input" hidden formControlName="idProducto" />
         </div>
-      </div>
-</div>
+      </form>
+
+      <div class="flex justify-end items-center gap-4 mt-6">
+        <button type="button" class="btn" (click)="datosActualizar()">Actualizar</button>
+        <form method="dialog">
+          <button type="submit" class="btn">Cerrar</button>
+        </form>
+      </div>      
+
+    </div>
+  </dialog>

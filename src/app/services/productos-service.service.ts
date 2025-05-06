@@ -9,11 +9,19 @@ import { Producto } from '../models/producto';
 export class ProductosServiceService {
   
   private http = inject(HttpClient)
-  private apiUrl = "http://127.0.0.1:8000/api/productos/factura"
+  private apiUrl = "http://127.0.0.1:8000/api/productos"
 
   constructor() { }
 
   getProductos():Observable<Producto[]>{
-    return this.http.get<Producto[]>(`${this.apiUrl}`);
+    return this.http.get<Producto[]>(`${this.apiUrl}/factura`);
+  }
+
+  getDetalleProducto(id:number):Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  actualizarProducto(id:number, data:any){
+    return this.http.put(`${this.apiUrl}/${id}`, data);
   }
 }

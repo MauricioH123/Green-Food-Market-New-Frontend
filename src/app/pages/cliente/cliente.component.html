@@ -1,0 +1,10 @@
+<app-listado-clientes 
+[clientesPaginados]="clientesPaginados" 
+[paginaActual]="paginaActual" 
+(paginaSiguiente)="siguientePagina($event)" 
+(paginaAnterior)="anteriorPagina($event)" 
+[paginaSiguienteA]="paginaSiguiente" 
+(idClientePadre)="obtenerDetalleCliente($event)"
+[detalleCliente]="detalleCliente"
+(detalleClientePadre)="actualizarDatosCliente($event.id, $event.nombre, $event.celular, $event.correo, $event.direccion)"
+/>

@@ -63,7 +63,7 @@ export class ListarProductosComponent implements OnChanges{
       id_producto: idProducto
     };
     this.datosActualizadosProductos.emit(datosProductoActualizar);
-    console.log(datosProductoActualizar);
+    // console.log(datosProductoActualizar);
 
     const modal: HTMLDialogElement | null = document.getElementById('my_modal_4') as HTMLDialogElement;
     if (modal) {

@@ -3,10 +3,11 @@ import { PaginacioProductosInventario } from '../../../../models/paginacio-produ
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms'
 import { Proveedor } from '../../../../models/proveedor';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listar-productos',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './listar-productos.component.html',
   styleUrl: './listar-productos.component.css'
 })

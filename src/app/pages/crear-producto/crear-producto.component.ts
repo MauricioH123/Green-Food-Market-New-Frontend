@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { FormularioCrearProductoComponent } from "./molecules/formulario-crear-producto/formulario-crear-producto.component";
 
 @Component({
   selector: 'app-crear-producto',
-  imports: [],
+  imports: [FormularioCrearProductoComponent],
   templateUrl: './crear-producto.component.html',
   styleUrl: './crear-producto.component.css'
 })

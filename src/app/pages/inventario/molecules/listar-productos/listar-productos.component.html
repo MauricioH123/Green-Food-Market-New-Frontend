@@ -1,10 +1,11 @@
 @if (mostrarAlert === true) {
-  <div role="alert" class="alert alert-success m-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-    <span>Producto Actualizado</span>
-  </div>
+<div role="alert" class="alert alert-success m-2">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <span>Producto Actualizado</span>
+</div>
 }
 
 
@@ -12,6 +13,9 @@
   <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-4xl m-8">
     <h2 class="text-2xl font-bold mb-6 text-center">Inventario de Productos</h2>
 
+    <div class="flex justify-end">
+      <a role="button" class="btn" routerLink="/homes/crearCliente">Crear Producto</a>
+    </div>
 
     <div class="overflow-x-auto">
       <table class="table table-xs">
@@ -32,7 +36,8 @@
             <td>{{producto.nombre_proveedor}}</td>
             <td>{{producto.cantidad}}</td>
             <td>
-              <button class="btn" onclick="my_modal_4.showModal()" (click)="obtenerProducto(producto.id)">Actualizar</button>
+              <button class="btn" onclick="my_modal_4.showModal()"
+                (click)="obtenerProducto(producto.id)">Actualizar</button>
             </td>
           </tr>
           }
@@ -69,13 +74,13 @@
             <legend class="fieldset-legend">Nombre</legend>
             <input type="text" class="input" formControlName="nombre" />
           </fieldset>
-  
+
           <fieldset class="fieldset">
             <legend class="fieldset-legend">Proveedores</legend>
             <select class="select" formControlName="idProveedor">
               <option disabled>Elige el Proveedor</option>
               @for (proveedor of proveedores; track proveedor.id) {
-                <option [value]="proveedor.id">{{proveedor.nombre_proveedor}}</option>
+              <option [value]="proveedor.id">{{proveedor.nombre_proveedor}}</option>
               }
             </select>
           </fieldset>
@@ -88,7 +93,7 @@
         <form method="dialog">
           <button type="submit" class="btn">Cerrar</button>
         </form>
-      </div>      
+      </div>
 
     </div>
   </dialog>

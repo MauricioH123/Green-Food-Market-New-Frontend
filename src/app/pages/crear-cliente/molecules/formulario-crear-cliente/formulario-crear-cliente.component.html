@@ -1,0 +1,84 @@
+@if (mostrarMensaje) {
+<div role="alert" class="alert alert-success">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Cliente Creado</span>
+</div>
+}
+
+
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-4xl">
+        <h2 class="text-2xl font-bold mb-6 text-center">Crear Cliente</h2>
+
+        <form [formGroup]="crearClienteForm" (ngSubmit)="enviarDatosAlPadre()">
+
+            <div class="col-span-4 my-6">
+                <hr class="border-t-2 border-gray-300" />
+                <h3 class="text-xl font-semibold text-gray-700 mt-4">Datos del Cliente</h3>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4">
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Nombre Cliente</legend>
+                    <input type="text" class="input" placeholder="Nombre Cliente" formControlName="nombre" />
+                    @if (crearClienteForm.get('nombre')?.errors && crearClienteForm.get('nombre')?.touched) {
+                    <div class="text-red-500 text-sm">
+                        El nombre del cliente es obligatorio
+                    </div>
+                    }
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Numero Celular</legend>
+                    <input type="text" class="input" placeholder="3012343160" formControlName="celular" />
+                    @if (crearClienteForm.get('celular')?.errors && crearClienteForm.get('celular')?.touched) {
+                    <div class="text-red-500 text-sm">
+                        El numero de celular es obligatorio
+                    </div>
+                    }
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Correo</legend>
+                    <input type="text" class="input" placeholder="ejemplo@gamil.com" formControlName="correo" />
+                    @if (crearClienteForm.get('correo')?.invalid && crearClienteForm.get('correo')?.touched) {
+                    @if (crearClienteForm.get('correo')?.errors?.['required']) {
+                    <div class="text-red-500 text-sm">
+                        El correo es obligatorio
+                    </div>
+                    }@else if (crearClienteForm.get('correo')?.errors?.['email']) {
+                    <div class="text-red-500 text-sm">
+                        Este campo debe tener formato email
+                    </div>
+                    }
+                    }
+                </fieldset>
+
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Direccion</legend>
+                    <input type="text" class="input" placeholder="Calle 56 #46-43 Barrio..."
+                        formControlName="direccion" />
+                    @if (crearClienteForm.get('direccion')?.errors && crearClienteForm.get('direccion')?.touched) {
+                    <div class="text-red-500 text-sm">
+                        La direccion es obligatorio
+                    </div>
+                    }
+
+                </fieldset>
+            </div>
+
+            <div class="flex justify-end mt-6">
+                <button type="submit" class="btn">Crear Cliente</button>
+            </div>
+
+
+        </form>
+    </div>
+
+</div>

@@ -11,6 +11,7 @@ import { VerFacturasCompraComponent } from './pages/ver-facturas-compra/ver-fact
 import { VerDetalleFacturaComprasComponent } from './pages/ver-detalle-factura-compras/ver-detalle-factura-compras.component';
 import { InventarioComponent } from './pages/inventario/inventario.component';
 import { ClienteComponent } from './pages/cliente/cliente.component';
+import { CrearClienteComponent } from './pages/crear-cliente/crear-cliente.component';
 
 export const routes: Routes = [
     {path:'', title:'Login', component: LoginComponent, canActivate:[loginGuard] },
@@ -23,7 +24,8 @@ export const routes: Routes = [
         {path: 'verFacturasCompras', component: VerFacturasCompraComponent},
         {path: 'detalleFacturaProveedor/:id', component: VerDetalleFacturaComprasComponent},
         {path: 'inventario', component: InventarioComponent},
-        {path: 'cliente', component: ClienteComponent}
+        {path: 'cliente', component: ClienteComponent},
+        {path: 'crearCliente', component: CrearClienteComponent}
     ] },
 
 ];

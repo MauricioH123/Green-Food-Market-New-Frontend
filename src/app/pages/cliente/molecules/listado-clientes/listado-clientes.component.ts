@@ -3,10 +3,11 @@ import { PaginacionClientes } from '../../../../models/paginacion-clientes';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms'
 import { Clientes } from '../../../../models/clientes';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listado-clientes',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './listado-clientes.component.html',
   styleUrl: './listado-clientes.component.css'
 })

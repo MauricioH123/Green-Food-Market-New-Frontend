@@ -1,1 +1,78 @@
-<p>formulario-crear-producto works!</p>
+@if (mostrarMensaje) {
+<div role="alert" class="alert alert-success">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Producto Creado</span>
+</div>
+}
+
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-4xl">
+        <h2 class="text-2xl font-bold mb-6 text-center">Crear Producto</h2>
+
+        <form [formGroup]="crearProductoForm" (ngSubmit)="obtenerDatos()">
+
+            <div class="col-span-4 my-6">
+                <hr class="border-t-2 border-gray-300" />
+                <h3 class="text-xl font-semibold text-gray-700 mt-4">Datos del Producto</h3>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4">
+
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Proveedor</legend>
+                    <select class="select" formControlName="proveedorId" >
+                        <option disabled selected>Pick a browser</option>
+                        @for (proveedor of proveedores; track proveedor.id) {
+                            <option [value]="proveedor.id">{{proveedor.nombre_proveedor}}</option>
+                        }
+                        
+                    </select>
+                    @if (crearProductoForm.get('proveedorId')?.errors && crearProductoForm.get('proveedorId')?.touched)
+                    {
+                    <div class="text-red-500 text-sm">
+                        El Proveedor es obligatorio
+                    </div>
+                    }
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Nombre del Producto</legend>
+                    <input type="text" class="input" placeholder="Nombre Producto" formControlName="nombre" />
+                    @if (crearProductoForm.get('nombre')?.errors && crearProductoForm.get('nombre')?.touched) {
+                    <div class="text-red-500 text-sm">
+                        El nombre del producto es obligatorio
+                    </div>
+                    }
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Precio de venta</legend>
+                    <input type="number" class="input" placeholder="1" formControlName="precio" />
+                    @if (crearProductoForm.get('precio')?.invalid && crearProductoForm.get('precio')?.touched) {
+                    @if (crearProductoForm.get('precio')?.errors?.['required']) {
+                    <div class="text-red-500 text-sm">
+                        El correo es obligatorio
+                    </div>
+                    }@else if (crearProductoForm.get('precio')?.errors?.['min']) {
+                    <div class="text-red-500 text-sm">
+                        El valor debe ser mayor a 0
+                    </div>
+                    }
+                    }
+                </fieldset>
+            </div>
+
+            <div class="flex justify-end mt-6">
+                <button type="submit" class="btn">Crear Producto</button>
+            </div>
+
+
+        </form>
+    </div>
+
+</div>

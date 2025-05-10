@@ -21,7 +21,11 @@ export class ProductosServiceService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  actualizarProducto(id:number, data:any){
+  actualizarProducto(id:number, data:any):Observable<any>{
     return this.http.put(`${this.apiUrl}/${id}`, data);
+  }
+
+  crearProducto(data: any):Observable<any>{
+    return this.http.post(this.apiUrl, data);
   }
 }

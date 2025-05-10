@@ -1,0 +1,10 @@
+<app-listar-proveedores [proveedores]="proveedoresPaginados"
+[paginaActual]="paginaActual" 
+(paginaSiguiente)="siguientePagina($event)" 
+(paginaAnterior)="anteriorPagina($event)" 
+[paginaSiguienteA]="paginaSiguiente" 
+(idProveedorPadre)="obterDatosDelProveedorId($event)"
+[datosDelProveedorId]="datosDelProveedorId"
+(datosDelProveedorActualizados)="actualizarDatosProveedor($event)"
+[mostrarMensaje]="seActualizoElProveedor"
+/>

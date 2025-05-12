@@ -1,0 +1,45 @@
+@if (mostrarMensaje) {
+<div role="alert" class="alert alert-success">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Proveedor Creado</span>
+</div>
+}
+
+
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-4xl">
+        <h2 class="text-2xl font-bold mb-6 text-center">Crear Proveedor</h2>
+
+        <form [formGroup]="proveedorForm" (ngSubmit)="enviarFormulario()">
+
+            <div class="col-span-4 my-6">
+                <hr class="border-t-2 border-gray-300" />
+                <h3 class="text-xl font-semibold text-gray-700 mt-4">Datos del Proveedor</h3>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4">
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Nombre Proveedor</legend>
+                    <input type="text" class="input" placeholder="Nombre Proveedor" formControlName="nombre" />
+                    @if (proveedorForm.get('nombre')?.errors && proveedorForm.get('nombre')?.touched) {
+                    <div class="text-red-500 text-sm">
+                        El nombre del cliente es obligatorio
+                    </div>
+                    }
+                </fieldset>
+            </div>
+
+            <div class="flex justify-end mt-6">
+                <button type="submit" class="btn">Crear Proveedor</button>
+            </div>
+
+
+        </form>
+    </div>
+
+</div>

@@ -2,10 +2,11 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from
 import { PaginacionProveedores } from '../../../../models/paginacion-proveedores';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Proveedor } from '../../../../models/proveedor';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listar-proveedores',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './listar-proveedores.component.html',
   styleUrl: './listar-proveedores.component.css'
 })

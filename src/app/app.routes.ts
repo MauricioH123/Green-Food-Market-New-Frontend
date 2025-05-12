@@ -14,6 +14,7 @@ import { ClienteComponent } from './pages/cliente/cliente.component';
 import { CrearClienteComponent } from './pages/crear-cliente/crear-cliente.component';
 import { CrearProductoComponent } from './pages/crear-producto/crear-producto.component';
 import { ProveedorComponent } from './pages/proveedor/proveedor.component';
+import { CrearProveedorComponent } from './pages/crear-proveedor/crear-proveedor.component';
 
 export const routes: Routes = [
     {path:'', title:'Login', component: LoginComponent, canActivate:[loginGuard] },
@@ -30,6 +31,9 @@ export const routes: Routes = [
         {path: 'crearCliente', component: CrearClienteComponent},
         {path: 'crearProducto', component: CrearProductoComponent},
         {path: 'proveedores', component: ProveedorComponent},
-    ] },
+        {path: 'crearProveedor', component: CrearProveedorComponent}
+    ]
+},
+{path: '**', redirectTo: '', pathMatch: 'full'},
 
 ];

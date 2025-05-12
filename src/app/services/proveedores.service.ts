@@ -27,4 +27,8 @@ export class ProveedoresService {
   actualizarProveedor(id:number, nombre:object){
     return this.http.put(`${this.apiUrl}/${id}`, nombre);
   }
+
+  crearProveedor(nombre:object){
+    return this.http.post(`${this.apiUrl}`, nombre);
+  }
 }

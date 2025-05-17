@@ -5,10 +5,11 @@ import { Proveedor } from '../../../../models/proveedor';
 import { Producto } from '../../../../models/producto';
 import { FacturaProveedor } from '../../../../models/factura-proveedor';
 import { DetalleProductoProveedor } from '../../../../models/detalle-producto-proveedor';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-crear-factura-proveedor',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CurrencyPipe],
   templateUrl: './crear-factura-proveedor.component.html',
   styleUrl: './crear-factura-proveedor.component.css'
 })
@@ -20,6 +21,8 @@ export class CrearFacturaProveedorComponent implements OnInit, OnChanges{
   @Input() productos!:Producto[];
   @Output() factura = new EventEmitter<FacturaProveedor>();
 
+  totalFactura!:number;
+
   facturaForm = new FormGroup({
     proveedor: new FormControl('', Validators.required),
     productos: new FormArray([
@@ -27,6 +30,7 @@ export class CrearFacturaProveedorComponent implements OnInit, OnChanges{
         idProducto: new FormControl(null, Validators.required),
         cantidad: new FormControl(1, [Validators.required, Validators.min(1)]),
         precio: new FormControl(0, [Validators.required, Validators.min(0.01)]),
+        total: new FormControl(0, Validators.required),
       })
     ]),
   });
@@ -59,8 +63,10 @@ export class CrearFacturaProveedorComponent implements OnInit, OnChanges{
       idProducto: new FormControl(null, Validators.required),
       cantidad: new FormControl(1, [Validators.required, Validators.min(1)]),
       precio: new FormControl(0, [Validators.required, Validators.min(0.01)]),
+      total: new FormControl(0, Validators.required),
     });
     this.productoss.push(nuevoProducto);
+    this.obtenerTotalPorProducto();
   }
 
   eliminarProducto(index:number){
@@ -95,8 +101,35 @@ export class CrearFacturaProveedorComponent implements OnInit, OnChanges{
       return undefined;
     }
 
+  obtenerTotalPorProducto(){
+    this.productoss.controls.forEach((element, index) => {
+      let productos = this.productoss.at(index);
+    productos.get('cantidad')?.valueChanges.subscribe( cantidad =>{
+      let precio = productos.get('precio')?.value;
+      productos.get('total')?.setValue(cantidad * precio);
+    })
+
+    productos.get('precio')?.valueChanges.subscribe( precio =>{
+      let cantidad = productos.get('cantidad')?.value;
+      productos.get('total')?.setValue(precio * cantidad);
+    })
+    });
+  }
+  
+  obtenerTotalFactura(){
+    this.productoss?.valueChanges.subscribe(productos => {
+      const total = productos.reduce((acc: number, p: any) =>{
+        const subtotal = parseFloat(p.total) || 0;
+        return acc + subtotal;
+      }, 0);
+      this.totalFactura = total;
+    })
+  }
+
     ngOnInit(): void{
       this.enviarNombreProveedor();
+      this.obtenerTotalPorProducto();
+      this.obtenerTotalFactura();
     }
 
     ngOnChanges(changes: SimpleChanges): void {

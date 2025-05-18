@@ -11,8 +11,6 @@
               <th>Proveedor</th>
               <th>Total</th>
               <th>Fecha</th>
-              <th>Enviar Correo</th>
-              <th>Imprimir</th>
             </tr>
           </thead>
           <tbody>
@@ -22,8 +20,6 @@
               <td><a  [routerLink]="['/homes','detalleFacturaProveedor', dato.id]" class="link link-neutral">{{dato.nombre_proveedor}}</a></td>
               <td>{{dato.total / 100 | currency:'COP ':'symbol' }} </td>
               <td>{{dato.fecha_entrada}}</td>
-              <td>Canada</td>
-              <td>12/16/2020</td>
             </tr>
             }
   
@@ -34,8 +30,6 @@
               <th>Cliente</th>
               <th>Total</th>
               <th>Estado</th>
-              <th>Enviar Correo</th>
-              <th>Imprimir</th>
             </tr>
           </tfoot>
         </table>

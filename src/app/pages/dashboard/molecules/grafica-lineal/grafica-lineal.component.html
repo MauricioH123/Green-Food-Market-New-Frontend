@@ -1,0 +1,13 @@
+@defer (when chartOptions) {
+<div id="chart">
+    <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!" [xaxis]="chartOptions.xaxis!"
+        [dataLabels]="chartOptions.dataLabels!" [grid]="chartOptions.grid!" [stroke]="chartOptions.stroke!"
+        [title]="chartOptions.title!"></apx-chart>
+</div>
+}@loading (minimum 1s) {
+<p>Loading comments...</p>
+} @error {
+<div class="text-center text-red-500 py-10">
+    <p>Ocurrió un error al cargar la factura.</p>
+</div>
+}

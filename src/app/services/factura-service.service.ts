@@ -27,4 +27,8 @@ export class FacturaServiceService {
   listarDetalleFactura(id:number):Observable<DetalleFacturaCliente>{
     return this.http.get<DetalleFacturaCliente>(`${this.apiUrl}/${id}`);
   }
+
+  listarFacturaTotal():Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/total`)
+  }
 }

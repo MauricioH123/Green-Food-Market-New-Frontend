@@ -1,1 +1,9 @@
-<app-listar-facturas [datosLista]="listaFactura.data" (estadoFactura)="actulizarEstadoFactura($event)" [paginaActual]="paginaActual" (paginaSiguiente)="siguientePagina($event)" (paginaAnterior)="anteriorPagina($event)" [paginaSiguienteA]="paginaSiguiente"/>
+<app-listar-facturas 
+[datosLista]="listaFactura.data" 
+(estadoFactura)="actulizarEstadoFactura($event)" 
+[paginaActual]="paginaActual" 
+(paginaSiguiente)="siguientePagina($event)" 
+(paginaAnterior)="anteriorPagina($event)" 
+[paginaSiguienteA]="paginaSiguiente" 
+(idFactura)="enviarCorreo($event)"
+[seEnvio]="respuestaDeEnvio"  />

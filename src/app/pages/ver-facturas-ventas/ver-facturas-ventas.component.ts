@@ -4,6 +4,7 @@ import { ListarFacturasComponent } from './molecules/listar-facturas/listar-fact
 import { PaginacionDetallePagos } from '../../models/paginacion-detalle-pagos';
 import { EstadoFacturaService } from '../../services/estado-factura.service';
 import { PagoRequest } from '../../models/pago-request';
+import { EmailServicesService } from '../../services/email-services.service';
 
 @Component({
   selector: 'app-ver-facturas-ventas',
@@ -15,9 +16,12 @@ export class VerFacturasVentasComponent implements OnInit {
   
   api = inject(FacturaServiceService);
   apiEstados = inject(EstadoFacturaService);
+  emailService = inject(EmailServicesService);
 
   paginaActual = 1;
   paginaSiguiente!:number;
+
+  respuestaDeEnvio:boolean = false;
 
 
   listaFactura:PaginacionDetallePagos = {
@@ -76,6 +80,16 @@ export class VerFacturasVentasComponent implements OnInit {
   //   }
   //   )
   // }
+
+  enviarCorreo(id:number){
+    this.emailService.enviarCorreo(id).subscribe(response =>{
+      this.respuestaDeEnvio = true;
+
+      setTimeout(()=>{
+        this.respuestaDeEnvio = false;
+      }, 1000)
+    })
+  }
 
 
   ngOnInit(): void {

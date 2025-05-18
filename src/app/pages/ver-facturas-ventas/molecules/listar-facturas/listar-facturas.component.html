@@ -1,3 +1,14 @@
+@if (seEnvio) {
+<div role="alert" class="alert alert-success">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Se envio el correo </span>
+</div>
+}
+
+
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
   <div class="bg-white p-10 rounded-2xl shadow-md w-full max-w-4xl m-8">
     <h2 class="text-2xl font-bold mb-6 text-center">Facturas Creadas</h2>
@@ -12,7 +23,6 @@
             <th>Total</th>
             <th>Estado</th>
             <th>Enviar Correo</th>
-            <th>Imprimir</th>
             <th>Actualizar Estado</th>
           </tr>
         </thead>
@@ -37,8 +47,9 @@
               </div> Credito
             </td>
             }
-            <td>Canada</td>
-            <td>12/16/2020</td>
+            <td>
+              <button class="btn" (click)="enviarIdFacturas(dato.id)">Enviar</button>
+            </td>
             <td>
               <button class="btn" (click)="abrirModal(dato); enviarEstadoFacturaAlPadre(dato.id, dato.estado)">Actualizar Estado</button>
             </td>
@@ -53,7 +64,6 @@
             <th>Total</th>
             <th>Estado</th>
             <th>Enviar Correo</th>
-            <th>Imprimir</th>
             <th>Actualizar Estado</th>
           </tr>
         </tfoot>

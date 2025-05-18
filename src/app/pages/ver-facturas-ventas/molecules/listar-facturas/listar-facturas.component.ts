@@ -21,6 +21,8 @@ export class ListarFacturasComponent {
   @Output() paginaAnterior = new EventEmitter;
   @Input() paginaActual!:number;
   @Input() paginaSiguienteA!:number;
+  @Output() idFactura = new EventEmitter<number>();
+  @Input() seEnvio!:boolean;
   modalFacturaSeleccionada: any = null;
   
   abrirModal(dato: any) {
@@ -52,6 +54,10 @@ export class ListarFacturasComponent {
       return 
     }
     this.paginaAnterior.emit(pagina - 1);
+  }
+
+  enviarIdFacturas(id:number){
+    this.idFactura.emit(id);
   }
   
 

@@ -1,1 +1,24 @@
-<p>grafica-barras works!</p>
+@defer (when chartOptions) {
+    <div id="chart">
+  <apx-chart
+    [series]="chartOptions.series!"
+    [chart]="chartOptions.chart!"
+    [dataLabels]="chartOptions.dataLabels!"
+    [plotOptions]="chartOptions.plotOptions!"
+    [yaxis]="chartOptions.yaxis!"
+    [xaxis]="chartOptions.xaxis!"
+    [legend]="chartOptions.legend!"
+    [colors]="chartOptions.colors!"
+    [grid]="chartOptions.grid!"
+    [title]="chartOptions.title!"
+  ></apx-chart>
+</div>
+}@loading (minimum 1s) {
+<p>Loading comments...</p>
+} @error {
+<div class="text-center text-red-500 py-10">
+    <p>Ocurrió un error al cargar.</p>
+</div>
+}
+
+

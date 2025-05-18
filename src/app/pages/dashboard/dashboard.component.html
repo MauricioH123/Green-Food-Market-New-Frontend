@@ -1,9 +1,11 @@
-<div class="grid grid-cols-4 gap-4 m-8">
+
+
+<div class="grid grid-cols-4 gap-4 m-8 mt-25">
     <div class="col-span-2">
         <app-grafica-lineal [totalesFactura]="totalFacturas" [fechasFactura]="fechaFacturas" />
     </div>
 
-    <div class="">
-
+    <div class="col-span-2">
+        <app-grafica-barras [cantidadProductos]="totalProductos" [nombresProductos]="nombresProductos" />
     </div>
 </div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PagoRequest } from '../models/pago-request';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { PagoRequest } from '../models/pago-request';
 export class EstadoFacturaService {
 
   private http = inject(HttpClient);
-  private apiUrl = 'http://127.0.0.1:8000/api/detalle-pago'
+  private apiUrl = environment.apiUrl+'/detalle-pago'
 
   actualizarEstado(estado:boolean, factura:number):Observable<any>{
     return this.http.put(`${this.apiUrl}/${factura}`, {estado:estado})

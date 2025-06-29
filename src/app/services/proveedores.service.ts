@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Proveedor } from '../models/proveedor';
 import { PaginacionFacturaProveedor } from '../models/paginacion-factura-proveedor';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { PaginacionFacturaProveedor } from '../models/paginacion-factura-proveed
 export class ProveedoresService {
 
  private  http = inject(HttpClient);
- private apiUrl = "http://127.0.0.1:8000/api/proveedores"
+ private apiUrl = environment.apiUrl+"/proveedores"
 
   getProveedores():Observable<Proveedor[]>{
     return this.http.get<Proveedor[]>(`${this.apiUrl}/factura`)

@@ -4,6 +4,7 @@ import { FacturaRequest } from '../models/factura-request';
 import { Observable } from 'rxjs';
 import { PaginacionDetallePagos } from '../models/paginacion-detalle-pagos';
 import { DetalleFacturaCliente } from '../models/detalle-factura-cliente';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { DetalleFacturaCliente } from '../models/detalle-factura-cliente';
 export class FacturaServiceService {
 
   private http = inject(HttpClient);
-  private apiUrl = "http://127.0.0.1:8000/api/facturas";
+  private apiUrl = environment.apiUrl+"/facturas";
 
 
   constructor() { }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class EmailServicesService {
 
   private http = inject(HttpClient);
-  private apiUrl = "http://127.0.0.1:8000/api/correo";
+  private apiUrl = environment.apiUrl+"/correo";
 
   enviarCorreo(id:number):Observable<string>{
     return this.http.get<string>(`${this.apiUrl}/${id}`)

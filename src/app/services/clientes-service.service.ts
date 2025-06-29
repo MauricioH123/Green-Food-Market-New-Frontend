@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Clientes } from '../models/clientes';
 import { PaginacionClientes } from '../models/paginacion-clientes';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ClientesServiceService {
   constructor() { }
 
     private http = inject(HttpClient);
-    private apiUrl = "http://127.0.0.1:8000/api/clientes";
+    private apiUrl = environment.apiUrl+"/clientes";
 
     getClientes():Observable<Clientes[]>{
       return this.http.get<Clientes[]>(`${this.apiUrl}/facturas`);

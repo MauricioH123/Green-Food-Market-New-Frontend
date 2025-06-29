@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { FacturaProveedor } from '../models/factura-proveedor';
 import { PaginacionFacturaProveedor } from '../models/paginacion-factura-proveedor';
 import { DetalleFacturaProveedores } from '../models/detalle-factura-proveedores';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { DetalleFacturaProveedores } from '../models/detalle-factura-proveedores
 export class FacturaProveedorServiceService {
 
   private http = inject(HttpClient);
-  private apiUrl = "http://127.0.0.1:8000/api/entradas";
+  private apiUrl = environment.apiUrl+"/entradas";
 
   crearFacturaProveedor(data:FacturaProveedor):Observable<any>{
     return this.http.post(this.apiUrl, data)

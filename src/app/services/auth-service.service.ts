@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { InisioSesion } from '../models/inisio-sesion';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class AuthServiceService {
 
   private http = inject(HttpClient);
-  private apiUrl  = "http://127.0.0.1:8000/api";
+  private apiUrl  = environment.apiUrl;
   public estadoAuth = new BehaviorSubject<boolean>(this.verificarToken());
   private router = inject(Router);
 
